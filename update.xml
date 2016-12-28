@@ -1,0 +1,6 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
+    <app appid='bfdemlhhaejhlmcblhoigbbcfboginnb'>
+        <updatecheck codebase='https://github.com/jaymoulin/bandcamp-down-chrome-ext/releases/download/0.4.4/bandcamp-down-chrome-ext.crx' version='0.4.4' />
+    </app>
+</gupdate>

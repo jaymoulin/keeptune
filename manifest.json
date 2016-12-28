@@ -1,0 +1,27 @@
+{
+  "manifest_version": 2,
+  "name": "Bandcamp Downloader",
+  "version": "0.0.1",
+  "description": "Download music via bandcamp. Please consider giving money to artists : http://bandcamp.com/help/audio_basics#steal",
+  //"page_action": {
+    /*"default_icon": {
+      "16": "icons/icon16.png",
+      "24": "icons/icon24.png",
+      "32": "icons/icon32.png"
+    },*/
+    //"default_title": "Bandcamp Downloader",
+    //"default_popup": "js/click.js"
+  //},
+  "background": {
+    "scripts": ["js/component.js", "js/background.js"],
+    "persistent": false
+  },
+  "content_scripts": [{
+    "matches": ["*://*.bandcamp.com/*"],
+    "js": ["js/content.js"]
+  }],
+  "permissions": [
+    "webNavigation", "tabs", "notifications"
+  ],
+  "update_url": "http://path/to/updateInfo.xml"
+}

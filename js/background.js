@@ -6,4 +6,11 @@ if (chrome && chrome.webNavigation && chrome.pageAction) {
         },
         {url: [{urlMatches: '://.*\.bandcamp\.com/(album/.*|releases)'}]}
     );
+    chrome.tabs.onRemoved.addListener(
+        function (tabId) {
+            if (objList[tabId]) {
+                delete objList[tabId];
+            }
+        }
+    );
 }

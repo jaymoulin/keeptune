@@ -19,6 +19,7 @@
     "scripts": ["js/dist/FileSaver.min.js", "js/dist/jszip.min.js", "js/component.js", "js/background.js"],
     "persistent": false
   },
+  "homepage_url": "https://jaymoulin.github.io/bandcamp-down-chrome-ext/",
   "content_scripts": [{
     "matches": ["*://*.bandcamp.com/*"],
     "js": ["js/content.js"]

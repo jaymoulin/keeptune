@@ -4,15 +4,17 @@ var Component = {
     album : null,
     folder : null,
     size: 0,
+    tabId: 0,
     progress: 0,
     zip: null
 };
 
 function alertDownload (res) {
-    Component.content = res;
     if (res && res.struct && res.struct.trackinfo) {
-        Component.artist = Component.content.struct.artist;
-        Component.album = Component.content.struct.current.title;
+        Component.content = res.struct;
+        Component.tabId = res.tabId;
+        Component.artist = res.struct.artist;
+        Component.album = res.struct.current.title;
         chrome.pageAction.setTitle({"tabId":res.tabId,"title":"Download " + Component.artist + ' - ' + Component.album});
         chrome.pageAction.onClicked.addListener(startDownloadAlbum);
         chrome.notifications.create({
@@ -26,16 +28,16 @@ function alertDownload (res) {
 }
 
 function startDownloadAlbum(notifId) {
-    if (notifId) {
+    if (typeof (notifId) !== 'object' && typeof (notifId) !== 'undefined') {
         chrome.notifications.clear(notifId);
     }
-    chrome.pageAction.hide(Component.content.tabId);
-    Component.size = Component.content.struct.trackinfo.length;
+    chrome.pageAction.hide(Component.tabId);
+    Component.size = Component.content.trackinfo.length;
     Component.progress = 0;
     Component.zip = new JSZip();
     Component.folder = Component.zip.folder(Component.artist).folder(Component.album);
-    for(var i in Component.content.struct.trackinfo) {
-        var track = Component.content.struct.trackinfo[i];
+    for(var i in Component.content.trackinfo) {
+        var track = Component.content.trackinfo[i];
         var trackName = track.track_num + ' - ' + track.title + '.mp3';
         var url = '';
         for (var index in track.file) {
@@ -58,10 +60,10 @@ function startDownloadAlbum(notifId) {
 }
 
 function downloadZip() {
+    chrome.pageAction.show(Component.tabId);
     Component.zip.generateAsync({type:"blob"}).then(
         function(content) {
             saveAs(content, Component.artist + ' - ' + Component.album + ".zip");
         }
     );
-    chrome.pageAction.show(Component.tabId);
 }

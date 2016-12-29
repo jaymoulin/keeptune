@@ -47,7 +47,9 @@ function startDownloadAlbum(notifId) {
         'type': "progress",
         'iconUrl': objList[tabId].content.albumart,
         "message": "Initializing...",
-        "progress": 1
+        "progress": 1,
+        "isClickable": false,
+        "requireInteraction": true
     });
     objList[tabId].size = objList[tabId].content.trackinfo.length;
     objList[tabId].progress = 0;

@@ -26,5 +26,6 @@
   "permissions": [
     "webNavigation",  "tabs", "notifications", "*://*.bcbits.com/*"
   ],
-  "update_url": "http://path/to/updateInfo.xml"
+  "minimum_chrome_version": "50",
+  "update_url": "https://jaymoulin.github.io/bandcamp-down-chrome-ext/update.xml"
 }

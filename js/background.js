@@ -1,6 +1,9 @@
-if (chrome && chrome.webNavigation) {
+if (chrome && chrome.webNavigation && chrome.pageAction) {
     chrome.webNavigation.onCompleted.addListener(
-        e => chrome.tabs.sendMessage(e.tabId, {}, null, alertDownload),
+        function (e) {
+            chrome.pageAction.show(e.tabId);
+            chrome.tabs.sendMessage(e.tabId, {"tabId": e.tabId}, null, alertDownload);
+        },
         {url: [{urlMatches: '://.*\.bandcamp\.com/(album/.*|releases)'}]}
     );
 }

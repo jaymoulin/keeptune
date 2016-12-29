@@ -1,17 +1,18 @@
 {
   "manifest_version": 2,
   "name": "Bandcamp Downloader",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Download music via bandcamp. Please consider giving money to artists : http://bandcamp.com/help/audio_basics#steal",
-  //"page_action": {
-    /*"default_icon": {
-      "16": "icons/icon16.png",
-      "24": "icons/icon24.png",
-      "32": "icons/icon32.png"
-    },*/
-    //"default_title": "Bandcamp Downloader",
-    //"default_popup": "js/click.js"
-  //},
+  //<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
+  "icons": {
+      "16": "icons/16.png",
+      "24": "icons/24.png",
+      "32": "icons/32.png",
+      "128": "icons/128.png"
+  },
+  "page_action": {
+    "default_title": "Bandcamp Downloader"
+  },
   "background": {
     "scripts": ["js/component.js", "js/background.js"],
     "persistent": false
@@ -21,7 +22,7 @@
     "js": ["js/content.js"]
   }],
   "permissions": [
-    "webNavigation", "tabs", "notifications"
+    "webNavigation",  "tabs", "notifications", "*://*.bcbits.com/*"
   ],
   "update_url": "http://path/to/updateInfo.xml"
 }

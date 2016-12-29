@@ -1,5 +1,5 @@
 if (chrome && chrome.runtime) {
-    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => sendResponse(hackJSvars()));
+    chrome.runtime.onMessage.addListener((message, sender, sendResponse) => sendResponse({"tabId": message.tabId, "struct": hackJSvars()}));
 }
 
 function hackJSvars() {

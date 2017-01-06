@@ -4,7 +4,7 @@ if (chrome && chrome.webNavigation && chrome.pageAction) {
             chrome.pageAction.show(e.tabId);
             chrome.tabs.sendMessage(e.tabId, {"tabId": e.tabId}, null, alertDownload);
         },
-        {url: [{urlMatches: '://.*\.bandcamp\.com/(album/.*|releases)'}]}
+        {url: [{urlMatches: '://.*/(album/.*|releases)'}]}
     );
     chrome.tabs.onRemoved.addListener(
         function (tabId) {

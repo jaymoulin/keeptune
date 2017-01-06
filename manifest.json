@@ -22,7 +22,7 @@
   },
   "homepage_url": "https://jaymoulin.github.io/bandcamp-down-chrome-ext/",
   "content_scripts": [{
-    "matches": ["*://*.bandcamp.com/*"],
+    "matches": ["*://*/*"],
     "js": ["js/content.js"]
   }],
   "permissions": [

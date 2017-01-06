@@ -1,4 +1,5 @@
 const DOWNLOAD_NOTIFICATION = 'DOWNLOAD_NOTIFICATION';
+const DOWNLOADING_NOTIFICATION = 'DOWNLOADING_NOTIFICATION';
 const PROGRESS_NOTIFICATION = 'PROGRESS_NOTIFICATION';
 
 var objList = [];
@@ -11,6 +12,7 @@ class Component {
         this.size = 0;
         this.progress = 0;
         this.zip = null;
+        this.started = false;
     }
 };
 
@@ -40,6 +42,16 @@ function startDownloadAlbum(notifId) {
         return;
     }
     var tabId = typeof (notifId) == 'object' ? notifId.id : notifId.replace(DOWNLOAD_NOTIFICATION, '')-0;
+    if (objList[tabId].started) {
+        chrome.notifications.create(DOWNLOADING_NOTIFICATION + tabId, {
+            'title': objList[tabId].artist + ' - ' + objList[tabId].album + " is already downloading!",
+            'type': "progress",
+            'iconUrl': objList[tabId].content.albumart,
+            "message": "Download is in progress...",
+            "progress": progress < 0 ? 0 : (progress > 100 ? 100 : progress),
+            "isClickable": false
+        });
+    }
     chrome.notifications.clear(DOWNLOAD_NOTIFICATION + tabId);
     chrome.pageAction.hide(tabId);
     chrome.notifications.create(PROGRESS_NOTIFICATION + tabId, {
@@ -53,6 +65,7 @@ function startDownloadAlbum(notifId) {
     });
     objList[tabId].size = objList[tabId].content.trackinfo.length;
     objList[tabId].progress = 0;
+    objList[tabId].started = true;
     objList[tabId].zip = new JSZip();
     objList[tabId].folder = objList[tabId].zip.folder(objList[tabId].artist).folder(objList[tabId].album);
     for(var i in objList[tabId].content.trackinfo) {
@@ -79,12 +92,28 @@ function startDownloadAlbum(notifId) {
                 downloadZip(this.arguments.tabId);
             }
         };
+        xhr.onreadystatechange = function () {
+            if (this.readyState === 4 && this.status !== 200) {
+                chrome.notifications.create({
+                    'title': objList[tabId].artist + ' - ' + objList[tabId].album + " error while downloading!",
+                    'type': "basic",
+                    'iconUrl': objList[tabId].content.albumart,
+                    "message": "Error while downloading " + this.arguments.trackName + ' : ' + this.statusText
+                });
+                var progress = Math.round((++(objList[this.arguments.tabId].progress)/(objList[this.arguments.tabId].size))*100);
+                chrome.notifications.update(PROGRESS_NOTIFICATION + this.arguments.tabId, {
+                    "progress": progress < 0 ? 0 : (progress > 100 ? 100 : progress),
+                    "message": this.arguments.trackName + " errored!"
+                });
+            }
+        };
         xhr.send(null);
     }
 }
 
 function downloadZip(tabId) {
     chrome.pageAction.show(tabId);
+    objList[tabId].started = false;
     objList[tabId].zip.generateAsync({type:"blob"}).then(
         function(content) {
             chrome.notifications.clear(PROGRESS_NOTIFICATION+tabId);

@@ -16,6 +16,7 @@ class Component {
 
 function alertDownload (res) {
     if (res && res.struct && res.struct.trackinfo) {
+        chrome.pageAction.show(res.tabId);
         objList[res.tabId] = new Component;
         objList[res.tabId].content = res.struct;
         objList[res.tabId].artist = res.struct.artist;

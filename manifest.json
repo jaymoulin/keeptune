@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Bandcamp Downloader",
   "short_name": "BndcmpDown",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Download music via bandcamp. Please consider giving money to artists : http://bandcamp.com/help/audio_basics#steal",
   //<div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
   "icons": {
@@ -23,7 +23,7 @@
   },
   "homepage_url": "https://jaymoulin.github.io/bandcamp-down-chrome-ext/",
   "content_scripts": [{
-    "matches": ["*://*.bandcamp.com/*"],
+    "matches": ["*://*/*"],
     "js": ["js/content.js"]
   }],
   "permissions": [

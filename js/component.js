@@ -49,7 +49,7 @@ function startDownloadAlbum(notifId) {
             'type': "progress",
             'iconUrl': objList[tabId].content.albumart,
             "message": "Download is in progress...",
-            "progress": progress < 0 ? 0 : (progress > 100 ? 100 : progress),
+            "progress": objList[tabId].progress,
             "isClickable": false
         });
     }

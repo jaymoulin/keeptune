@@ -9,7 +9,7 @@ if (chrome && chrome.runtime) {
 
 function hackJSvars() {
     var pagedata = document.getElementById("pagedata");
-    if (typeof(pagedata) == 'undefined') {
+    if (typeof(pagedata) == 'undefined' || pagedata == null) {
         return null;
     }
 

@@ -2,6 +2,8 @@ const DOWNLOAD_NOTIFICATION = 'DOWNLOAD_NOTIFICATION';
 const PROGRESS_NOTIFICATION = 'PROGRESS_NOTIFICATION';
 
 var objList = [];
+let options = new Options;
+
 class Component {
     constructor() {
         this.tabId = null;

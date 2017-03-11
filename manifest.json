@@ -18,7 +18,13 @@
   //uses https://github.com/Stuk/jszip v3.1.3
   //uses https://github.com/eligrey/FileSaver.js v1.3.3
   "background": {
-    "scripts": ["js/dist/FileSaver.min.js", "js/dist/jszip.min.js", "js/component.js", "js/background.js"],
+    "scripts": [
+      "js/dist/FileSaver.min.js",
+      "js/dist/jszip.min.js",
+      "js/options.js",
+      "js/component.js",
+      "js/background.js"
+    ],
     "persistent": false
   },
   "homepage_url": "https://jaymoulin.github.io/bandcamp-down-chrome-ext/",

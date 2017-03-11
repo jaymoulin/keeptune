@@ -7,7 +7,7 @@ if (chrome && chrome.webNavigation && chrome.tabs) {
             if (typeof(objList[e.url]) != 'undefined') {
                 displayAlert(e.url)
             }
-            if (e.url.indexOf('http') == 0) {
+            if (e.url.indexOf('http') === 0) {
                 var xhr = new XMLHttpRequest();
                 xhr.open("GET", e.url, true);
                 xhr.onload = function () {

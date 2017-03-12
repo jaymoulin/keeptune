@@ -1,8 +1,11 @@
 if (chrome && chrome.webNavigation && chrome.tabs) {
+    chrome.pageAction.onClicked.addListener(startDownloadAlbum);
+    chrome.notifications.onClicked.addListener(startDownloadAlbum);
+
     chrome.webNavigation.onCompleted.addListener(
         function (e) {
             if (typeof(objList[e.url]) != 'undefined') {
-                chrome.pageAction.show(e.tabId);
+                displayAlert(e.url)
             }
             if (e.url.indexOf('http') == 0) {
                 var xhr = new XMLHttpRequest();

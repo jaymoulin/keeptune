@@ -17,27 +17,29 @@ class Component {
     }
 };
 
+function displayAlert(url) {
+    chrome.pageAction.show(objList[url].tabId);
+    chrome.notifications.create(DOWNLOAD_NOTIFICATION + url, {
+        'title': "This album is downloadable!",
+        'type': "basic",
+        'iconUrl': objList[url].content.albumart,
+        "message": "Click here to download " + objList[url].artist + ' - ' + objList[url].album
+    });
+}
+
 function alertDownload(res) {
     if (res && res.struct && res.struct.trackinfo) {
-        chrome.pageAction.show(res.tabId);
         objList[res.url] = new Component;
         objList[res.url].tabId = res.tabId;
         objList[res.url].url = res.url;
         objList[res.url].content = res.struct;
         objList[res.url].artist = res.struct.artist;
         objList[res.url].album = res.struct.current.title;
+        displayAlert(res.url)
         chrome.pageAction.setTitle({
             "tabId":res.tabId,
             "title":"Download " + objList[res.url].artist + ' - ' + objList[res.url].album
         });
-        chrome.pageAction.onClicked.addListener(startDownloadAlbum);
-        chrome.notifications.create(DOWNLOAD_NOTIFICATION + res.url, {
-            'title': "This album is downloadable!",
-            'type': "basic",
-            'iconUrl': res.struct.albumart,
-            "message": "Click here to download " + objList[res.url].artist + ' - ' + objList[res.url].album
-        });
-        chrome.notifications.onClicked.addListener(startDownloadAlbum);
     }
 }
 
@@ -65,17 +67,16 @@ function startDownloadAlbum(notifId) {
     objList[url].started = true;
     objList[url].zip = new JSZip();
     objList[url].folder = objList[url].zip.folder(objList[url].artist).folder(objList[url].album);
-    for(var i in objList[url].content.trackinfo) {
-        var track = objList[url].content.trackinfo[i];
-        var trackName = track.track_num + ' - ' + track.title + '.mp3';
-        var trackUrl = '';
+    objList[url].content.trackinfo.forEach(function (track, trackId) {
+        let trackName = track.track_num + ' - ' + track.title + '.mp3';
+        let trackUrl = '';
         for (var index in track.file) {
             trackUrl = track.file[index];
             break;
         }
 
-        downloadProcess(url, trackUrl, trackName, i)
-    }
+        downloadProcess(url, trackUrl, trackName, trackId)
+    })
 }
 
 function downloadProcess(url, trackUrl, trackName, trackId) {
@@ -113,7 +114,7 @@ function downloadProcess(url, trackUrl, trackName, trackId) {
                 that = this
                 setTimeout(function () {
                     downloadProcess(that.arguments.url, that.arguments.trackUrl, that.arguments.trackName, that.arguments.trackId)
-                }, 4000)
+                }, 1000)
             } else {
                 objList[this.arguments.url].retryTrack[this.arguments.trackId]++
             }

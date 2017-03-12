@@ -1,16 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8">
-        <title>Bandcamp Downloader - Settings Page</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <link rel="icon" href="icons/16.png">
+
+        <title>Bandcamp Downloader</title>
+
+        <!-- Bootstrap core CSS -->
+        <link href="css/dist/bootstrap.min.css" rel="stylesheet">
+        <!-- Bootstrap theme -->
+        <link href="css/dist/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="css/dist/material-switch.css" rel="stylesheet">
+        <link href="css/theme.css" rel="stylesheet">
     </head>
+
     <body>
-        <label for="download_mode">Download Mode</label>
-        <select name="download_mode" id="download_mode">
-            <option value="sync">Synchronous (Tracks downloaded only if previous track finished - Secure but slow)</option>
-            <option value="async">Asynchronous (Tries to downloaded tracks simultaneously - Quick but risks of error)</option>
-        </select>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="https://jaymoulin.github.io/bandcamp-down-chrome-ext/">Bandcamp Downloader</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <!--li class="active"><a href="#downloads">Downloads</a></li-->
+                        <li class="active"><a href="#settings">Settings</a></li>
+                        <li><a href="https://github.com//jaymoulin/bandcamp-down-chrome-ext/issues">Bug report / Suggestion</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+
+        <div class="container theme-showcase" role="main">
+            <div id="settings">
+                <div class="page-header">
+                    <h1>Settings</h1>
+                </div>
+                <div class="panel panel-default">
+                    <!-- Default panel contents -->
+                    <div class="panel-heading">Download Notifications</div>
+
+                    <!-- List group -->
+                    <ul id="notifications_list" class="list-group"></ul>
+                </div>
+            </div>
+        </div> <!-- /container -->
         <script type="text/javascript" src="js/options.js"></script>
         <script type="text/javascript" src="js/settings.js"></script>
     </body>
 </html>
+
+
+<!--
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Bandcamp Downloader - Settings Page</title>
+    </head>
+    <body>
+        <div id="notifications">
+            <h1>Notifications</h1>
+            <div id="notifications_list"></div>
+        </div>
+        <div id="downloads">
+            <h1>Downloads</h1>
+            <div id="downloads_list"></div>
+        </div>
+        <script type="text/javascript" src="js/options.js"></script>
+        <script type="text/javascript" src="js/settings.js"></script>
+    </body>
+</html>
+-->

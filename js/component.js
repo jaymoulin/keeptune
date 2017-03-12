@@ -1,5 +1,6 @@
 const DOWNLOAD_NOTIFICATION = 'DOWNLOAD_NOTIFICATION';
 const PROGRESS_NOTIFICATION = 'PROGRESS_NOTIFICATION';
+const COMPLETE_NOTIFICATION = 'COMPLETE_NOTIFICATION';
 
 var objList = [];
 let options = new Options;
@@ -21,12 +22,14 @@ class Component {
 
 function displayAlert(url) {
     chrome.pageAction.show(objList[url].tabId);
-    chrome.notifications.create(DOWNLOAD_NOTIFICATION + url, {
-        'title': "This album is downloadable!",
-        'type': "basic",
-        'iconUrl': objList[url].content.albumart,
-        "message": "Click here to download " + objList[url].artist + ' - ' + objList[url].album
-    });
+    if (options.getNotification(SETTINGS_NOTIF_DOWNLOAD_ALERT)) {
+        chrome.notifications.create(DOWNLOAD_NOTIFICATION + url, {
+            'title': "This album is downloadable!",
+            'type': "basic",
+            'iconUrl': objList[url].content.albumart,
+            "message": "Click here to download " + objList[url].artist + ' - ' + objList[url].album
+        });
+    }
 }
 
 function alertDownload(res) {
@@ -55,15 +58,17 @@ function startDownloadAlbum(notifId) {
     }
     chrome.notifications.clear(DOWNLOAD_NOTIFICATION + url);
     chrome.pageAction.hide(objList[url].tabId);
-    chrome.notifications.create(PROGRESS_NOTIFICATION + url, {
-        'title': "Downloading " + objList[url].artist + ' - ' + objList[url].album,
-        'type': "progress",
-        'iconUrl': objList[url].content.albumart,
-        "message": "Initializing...",
-        "progress": 1,
-        "isClickable": false,
-        "requireInteraction": true
-    });
+    if (options.getNotification(SETTINGS_NOTIF_DOWNLOAD_PROGRESS)) {
+        chrome.notifications.create(PROGRESS_NOTIFICATION + url, {
+            'title': "Downloading " + objList[url].artist + ' - ' + objList[url].album,
+            'type': "progress",
+            'iconUrl': objList[url].content.albumart,
+            "message": "Initializing...",
+            "progress": 1,
+            "isClickable": false,
+            "requireInteraction": true
+        });
+    }
     objList[url].size = objList[url].content.trackinfo.length;
     objList[url].progress = 0;
     objList[url].started = true;
@@ -95,11 +100,14 @@ function downloadProcess(url, trackUrl, trackName, trackId) {
             objList[this.arguments.url].progress++
         }
         let progress = Math.round((objList[this.arguments.url].progress/(objList[this.arguments.url].size))*100);
-        chrome.notifications.update(PROGRESS_NOTIFICATION + this.arguments.url, {
-            "progress": progress < 0 ? 0 : (progress > 100 ? 100 : progress),
-            "message": this.arguments.trackName + (this.status === 200 ? " downloaded!" : " errored !")
-        });
-        if (objList[this.arguments.url].progress == objList[this.arguments.url].size) {
+        progress = progress < 0 ? 0 : (progress > 100 ? 100 : progress)
+        if (options.getNotification(SETTINGS_NOTIF_DOWNLOAD_PROGRESS)) {
+            chrome.notifications.update(PROGRESS_NOTIFICATION + this.arguments.url, {
+                "progress": progress,
+                "message": this.arguments.trackName + (this.status === 200 ? " downloaded!" : " errored !")
+            });
+        }
+        if (progress == 100) {
             downloadZip(this.arguments.url);
         }
     };
@@ -131,6 +139,14 @@ function downloadZip(url) {
     objList[url].zip.generateAsync({type:"blob"}).then(
         function(content) {
             chrome.notifications.clear(PROGRESS_NOTIFICATION+url);
+            if (options.getNotification(SETTINGS_NOTIF_DOWNLOAD_COMPLETE)) {
+                chrome.notifications.create(COMPLETE_NOTIFICATION + url, {
+                    'title': objList[url].artist + ' - ' + objList[url].album,
+                    'type': "basic",
+                    'iconUrl': objList[url].content.albumart,
+                    "message": "download complete!"
+                });
+            }
             saveAs(content, objList[url].artist + ' - ' + objList[url].album + ".zip");
         }
     );

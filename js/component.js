@@ -14,7 +14,7 @@ class Component {
         this.folder = null;
         this.size = 0;
         this.progress = 0;
-        this.retryTrack = [];
+        this.tracks = [];
         this.zip = null;
         this.started = false;
     }
@@ -81,33 +81,36 @@ function startDownloadAlbum(notifId) {
             trackUrl = track.file[index];
             break;
         }
-
-        downloadProcess(url, trackUrl, trackName, trackId)
+        objList[url].tracks[trackId] = {
+            retry: 0,
+            file: trackName,
+            track: track.title,
+            success:null,
+            url:trackUrl
+        }
+        downloadProcess(url, trackId)
     })
 }
 
-function downloadProcess(url, trackUrl, trackName, trackId) {
-    let retry = typeof(objList[url].retryTrack[trackId]) == 'undefined' ? 0 : objList[url].retryTrack[trackId]
+function downloadProcess(url, trackId) {
+    let trackUrl = objList[url].tracks[trackId].url;
     let xhr = new XMLHttpRequest();
-    xhr.open("GET", 'https:' + trackUrl + '&retry=' + retry);
+    xhr.open("GET", 'https:' + trackUrl + '&retry=' + objList[url].tracks[trackId].retry);
     xhr.responseType = "blob";
-    xhr.arguments = {"trackName": trackName, "url":url, "trackId":trackId, "trackUrl": trackUrl};
+    xhr.arguments = {"url":url, "trackId":trackId};
     xhr.onload = function() {
-        if (this.status === 200) {
-            objList[this.arguments.url].folder.file(this.arguments.trackName, this.response);
-        }
-        if (this.status === 200 || objList[url].retryTrack[trackId] > 1) {
+        let success = (objList[this.arguments.url].tracks[this.arguments.trackId].success = (this.status === 200))
+        if (success) {
+            objList[this.arguments.url].folder.file(objList[this.arguments.url].tracks[this.arguments.trackId].track, this.response);
             objList[this.arguments.url].progress++
         }
-        let progress = Math.round((objList[this.arguments.url].progress/(objList[this.arguments.url].size))*100);
-        progress = progress < 0 ? 0 : (progress > 100 ? 100 : progress)
         if (options.getNotification(SETTINGS_NOTIF_DOWNLOAD_PROGRESS)) {
             chrome.notifications.update(PROGRESS_NOTIFICATION + this.arguments.url, {
-                "progress": progress,
-                "message": this.arguments.trackName + (this.status === 200 ? " downloaded!" : " errored !")
+                "progress": getProgress(this.arguments.url),
+                "message": objList[this.arguments.url].tracks[this.arguments.trackId].track + (success ? " downloaded!" : " errored !")
             });
         }
-        if (progress == 100) {
+        if (getProgress(this.arguments.url) == 100) {
             downloadZip(this.arguments.url);
         }
     };
@@ -117,20 +120,16 @@ function downloadProcess(url, trackUrl, trackName, trackId) {
                 'title': objList[this.arguments.url].artist + ' - ' + objList[this.arguments.url].album + " error while downloading!",
                 'type': "basic",
                 'iconUrl': objList[this.arguments.url].content.albumart,
-                "message": "Error while downloading " + this.arguments.trackName + ' : ' + this.statusText
+                "message": "Error while downloading " + objList[this.arguments.url].tracks[this.arguments.trackId].track + ' : ' + this.statusText
             });
-            if (typeof(objList[this.arguments.url].retryTrack[this.arguments.trackId]) == 'undefined') {
-                objList[this.arguments.url].retryTrack[this.arguments.trackId] = 1
-                that = this
-                setTimeout(function () {
-                    downloadProcess(that.arguments.url, that.arguments.trackUrl, that.arguments.trackName, that.arguments.trackId)
-                }, 1000)
-            } else {
-                objList[this.arguments.url].retryTrack[this.arguments.trackId]++
-            }
         }
     };
     xhr.send(null);
+}
+
+function getProgress(url) {
+    let progress = Math.round((objList[url].progress/(objList[url].size))*100);
+    return progress < 0 ? 0 : (progress > 100 ? 100 : progress)
 }
 
 function downloadZip(url) {

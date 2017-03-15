@@ -28,9 +28,17 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <!--li class="active"><a href="#downloads">Downloads</a></li-->
-                        <li class="active"><a href="#settings">Settings</a></li>
+                        <li class="active"><a href="#downloads">Downloads</a></li>
+                        <li><a href="#settings">Settings</a></li>
                         <li><a href="https://github.com//jaymoulin/bandcamp-down-chrome-ext/issues">Bug report / Suggestion</a></li>
+                        <li>
+                            <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" id="donate">
+                                <input type="hidden" name="cmd" value="_s-xclick">
+                                <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----">
+                                <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+                                <img alt="" border="0" src="https://www.paypalobjects.com/fr_FR/i/scr/pixel.gif" width="1" height="1">
+                            </form>
+                        </li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -49,32 +57,15 @@
                     <ul id="notifications_list" class="list-group"></ul>
                 </div>
             </div>
+
+            <div id="downloads">
+                <div class="page-header">
+                    <h1>Downloads</h1>
+                </div>
+                <div id="downloads_list"></div>
+            </div>
         </div> <!-- /container -->
         <script type="text/javascript" src="js/options.js"></script>
         <script type="text/javascript" src="js/settings.js"></script>
     </body>
 </html>
-
-
-<!--
-
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Bandcamp Downloader - Settings Page</title>
-    </head>
-    <body>
-        <div id="notifications">
-            <h1>Notifications</h1>
-            <div id="notifications_list"></div>
-        </div>
-        <div id="downloads">
-            <h1>Downloads</h1>
-            <div id="downloads_list"></div>
-        </div>
-        <script type="text/javascript" src="js/options.js"></script>
-        <script type="text/javascript" src="js/settings.js"></script>
-    </body>
-</html>
--->

@@ -28,8 +28,8 @@
                 </div>
                 <div id="navbar" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#downloads">Downloads</a></li>
-                        <li><a href="#settings">Settings</a></li>
+                        <li class="active" id="menu_downloads"><a href="#downloads">Downloads</a></li>
+                        <li id="menu_settings"><a href="#settings">Settings</a></li>
                         <li><a href="https://github.com//jaymoulin/bandcamp-down-chrome-ext/issues">Bug report / Suggestion</a></li>
                         <li>
                             <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" id="donate">
@@ -45,6 +45,15 @@
         </nav>
 
         <div class="container theme-showcase" role="main">
+            <div id="downloads">
+                <div class="page-header">
+                    <h1>Downloads</h1>
+                </div>
+                <div id="downloads_list">
+                    <p class="well text-center">Nothing to download for the moment!</p>
+                </div>
+            </div>
+
             <div id="settings">
                 <div class="page-header">
                     <h1>Settings</h1>
@@ -56,13 +65,6 @@
                     <!-- List group -->
                     <ul id="notifications_list" class="list-group"></ul>
                 </div>
-            </div>
-
-            <div id="downloads">
-                <div class="page-header">
-                    <h1>Downloads</h1>
-                </div>
-                <div id="downloads_list"></div>
             </div>
         </div> <!-- /container -->
         <script type="text/javascript" src="js/options.js"></script>

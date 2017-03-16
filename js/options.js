@@ -45,4 +45,9 @@ class Options {
         value = (value === null ? mapping.value : value === 'true')
         return value
     }
+
+    notify() {
+        let name = 'bndcmpdwn.notify'
+        localStorage.setItem(name, Math.random() * 100000)
+    }
 }

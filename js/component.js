@@ -40,12 +40,37 @@ function alertDownload(res) {
         objList[res.url].content = res.struct;
         objList[res.url].artist = res.struct.artist;
         objList[res.url].album = res.struct.current.title;
+        objList[res.url].content.trackinfo.forEach(function (track, trackId) {
+            let trackName = track.track_num + ' - ' + track.title + '.mp3';
+            let trackUrl = '';
+            for (var index in track.file) {
+                trackUrl = track.file[index];
+                break;
+            }
+            objList[res.url].tracks[trackId] = {
+                retry: 0,
+                file: trackName,
+                track: track.title,
+                success:null,
+                url:trackUrl
+            }
+        })
+        options.notify()
         displayAlert(res.url)
         chrome.pageAction.setTitle({
             "tabId":res.tabId,
             "title":"Download " + objList[res.url].artist + ' - ' + objList[res.url].album
         });
     }
+}
+
+function rejectDownload(url) {
+    chrome.notifications.clear(DOWNLOAD_NOTIFICATION + url);
+    chrome.notifications.clear(PROGRESS_NOTIFICATION + url);
+    chrome.notifications.clear(COMPLETE_NOTIFICATION + url);
+    chrome.pageAction.hide(objList[url].tabId);
+    delete objList[url]
+    options.notify()
 }
 
 function startDownloadAlbum(notifId) {
@@ -74,44 +99,34 @@ function startDownloadAlbum(notifId) {
     objList[url].started = true;
     objList[url].zip = new JSZip();
     objList[url].folder = objList[url].zip.folder(objList[url].artist).folder(objList[url].album);
-    objList[url].content.trackinfo.forEach(function (track, trackId) {
-        let trackName = track.track_num + ' - ' + track.title + '.mp3';
-        let trackUrl = '';
-        for (var index in track.file) {
-            trackUrl = track.file[index];
-            break;
-        }
-        objList[url].tracks[trackId] = {
-            retry: 0,
-            file: trackName,
-            track: track.title,
-            success:null,
-            url:trackUrl
-        }
+    options.notify()
+    for (let trackId in objList[url].content.trackinfo) {
         downloadProcess(url, trackId)
-    })
+    }
 }
 
 function downloadProcess(url, trackId) {
-    let trackUrl = objList[url].tracks[trackId].url;
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", 'https:' + trackUrl + '&retry=' + objList[url].tracks[trackId].retry);
-    xhr.responseType = "blob";
-    xhr.arguments = {"url":url, "trackId":trackId};
+    objList[url].tracks[trackId].success = null
+    let trackUrl = objList[url].tracks[trackId].url
+    let xhr = new XMLHttpRequest()
+    xhr.open("GET", 'https:' + trackUrl + '&retry=' + objList[url].tracks[trackId].retry++)
+    xhr.responseType = "blob"
+    xhr.arguments = {"url":url, "trackId":trackId}
     xhr.onload = function() {
         let success = (objList[this.arguments.url].tracks[this.arguments.trackId].success = (this.status === 200))
         if (success) {
-            objList[this.arguments.url].folder.file(objList[this.arguments.url].tracks[this.arguments.trackId].track, this.response);
+            objList[this.arguments.url].folder.file(objList[this.arguments.url].tracks[this.arguments.trackId].track, this.response)
             objList[this.arguments.url].progress++
         }
         if (options.getNotification(SETTINGS_NOTIF_DOWNLOAD_PROGRESS)) {
             chrome.notifications.update(PROGRESS_NOTIFICATION + this.arguments.url, {
                 "progress": getProgress(this.arguments.url),
                 "message": objList[this.arguments.url].tracks[this.arguments.trackId].track + (success ? " downloaded!" : " errored !")
-            });
+            })
         }
+        options.notify()
         if (getProgress(this.arguments.url) == 100) {
-            downloadZip(this.arguments.url);
+            downloadZip(this.arguments.url)
         }
     };
     xhr.onreadystatechange = function () {
@@ -121,10 +136,10 @@ function downloadProcess(url, trackId) {
                 'type': "basic",
                 'iconUrl': objList[this.arguments.url].content.albumart,
                 "message": "Error while downloading " + objList[this.arguments.url].tracks[this.arguments.trackId].track + ' : ' + this.statusText
-            });
+            })
         }
-    };
-    xhr.send(null);
+    }
+    xhr.send(null)
 }
 
 function getProgress(url) {
@@ -133,8 +148,6 @@ function getProgress(url) {
 }
 
 function downloadZip(url) {
-    chrome.pageAction.show(objList[url].tabId);
-    objList[url].started = false;
     objList[url].zip.generateAsync({type:"blob"}).then(
         function(content) {
             chrome.notifications.clear(PROGRESS_NOTIFICATION+url);
@@ -147,6 +160,8 @@ function downloadZip(url) {
                 });
             }
             saveAs(content, objList[url].artist + ' - ' + objList[url].album + ".zip");
+            delete objList[url]
+            options.notify()
         }
     );
 }

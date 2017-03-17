@@ -130,7 +130,7 @@ function downloadProcess(url, trackId) {
         }
     };
     xhr.onreadystatechange = function () {
-        if (this.readyState === 4 && this.status !== 200) {
+        if (this.readyState === 4 && this.status !== 200 && options.getNotification(SETTINGS_NOTIF_DOWNLOAD_ERROR)) {
             chrome.notifications.create({
                 'title': objList[this.arguments.url].artist + ' - ' + objList[this.arguments.url].album + " error while downloading!",
                 'type': "basic",

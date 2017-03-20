@@ -115,7 +115,7 @@ function downloadProcess(url, trackId) {
     xhr.onload = function() {
         let success = (objList[this.arguments.url].tracks[this.arguments.trackId].success = (this.status === 200))
         if (success) {
-            objList[this.arguments.url].folder.file(objList[this.arguments.url].tracks[this.arguments.trackId].track, this.response)
+            objList[this.arguments.url].folder.file(objList[this.arguments.url].tracks[this.arguments.trackId].file, this.response)
             objList[this.arguments.url].progress++
         }
         if (options.getNotification(SETTINGS_NOTIF_DOWNLOAD_PROGRESS)) {

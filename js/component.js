@@ -36,7 +36,7 @@ function alertDownload(res) {
     if (res && res.struct && res.struct.trackinfo) {
         objList[res.url] = new Component;
         objList[res.url].tabId = res.tabId;
-        objList[res.url].url = res.url;
+        objList[res.url].url = res.struct.url;
         objList[res.url].content = res.struct;
         objList[res.url].artist = res.struct.artist;
         objList[res.url].album = res.struct.current.title;
@@ -125,7 +125,7 @@ function downloadProcess(url, trackId) {
             })
         }
         options.notify()
-        if (getProgress(this.arguments.url) == 100) {
+        if (getProgress(this.arguments.url) === 100) {
             downloadZip(this.arguments.url)
         }
     };

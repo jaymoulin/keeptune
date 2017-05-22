@@ -2,7 +2,7 @@ if (chrome && chrome.runtime) {
     chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
         var struct = hackJSvars();
         if (struct) {
-            sendResponse({"url": message.url, "tabId": message.tabId, "struct": struct});
+            sendResponse({"url": struct.id, "tabId": message.tabId, "struct": struct});
         }
     });
 }

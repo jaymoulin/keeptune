@@ -100,7 +100,7 @@ class Settings {
                                 </div>
                             </li>`
             })
-            let progress = chrome.extension.getBackgroundPage().getProgress(component.url)
+            let progress = chrome.extension.getBackgroundPage().getProgress(url)
             let progressBar = progress === 100
                 ? ''
                 : `<div class="${tracksHasError && !tracksHasWaiting ? 'col-xs-8 col-md-9' : 'col-xs-12'}">

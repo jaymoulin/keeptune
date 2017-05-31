@@ -42,17 +42,19 @@ function alertDownload(res) {
         objList[res.url].album = res.struct.current.title;
         objList[res.url].content.trackinfo.forEach(function (track, trackId) {
             let trackName = track.track_num + ' - ' + track.title + '.mp3';
-            let trackUrl = '';
+            let trackUrl = null;
             for (var index in track.file) {
                 trackUrl = track.file[index];
                 break;
             }
-            objList[res.url].tracks[trackId] = {
-                retry: 0,
-                file: trackName,
-                track: track.title,
-                success:null,
-                url:trackUrl
+            if (trackUrl) {
+                objList[res.url].tracks[trackId] = {
+                    retry: 0,
+                    file: trackName,
+                    track: track.title,
+                    success:null,
+                    url:trackUrl
+                }
             }
         })
         options.notify()
@@ -94,13 +96,16 @@ function startDownloadAlbum(notifId) {
             "requireInteraction": true
         });
     }
-    objList[url].size = objList[url].content.trackinfo.length;
+    objList[url].size = 0;
     objList[url].progress = 0;
     objList[url].started = true;
     objList[url].zip = new JSZip();
     objList[url].folder = objList[url].zip.folder(objList[url].artist).folder(objList[url].album);
     options.notify()
-    for (let trackId in objList[url].content.trackinfo) {
+    for (let trackId in objList[url].tracks) {
+        objList[url].size++
+    }
+    for (let trackId in objList[url].tracks) {
         downloadProcess(url, trackId)
     }
 }

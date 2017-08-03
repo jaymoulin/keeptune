@@ -2,7 +2,8 @@ const SETTINGS_NOTIF_DOWNLOAD_ALERT = 'SETTINGS_NOTIF_DOWNLOAD_ALERT',
     SETTINGS_NOTIF_DOWNLOAD_ALERT_DISCOGRAPHY = 'SETTINGS_NOTIF_DOWNLOAD_ALERT_DISCOGRAPHY',
     SETTINGS_NOTIF_DOWNLOAD_PROGRESS = 'SETTINGS_NOTIF_DOWNLOAD_PROGRESS',
     SETTINGS_NOTIF_DOWNLOAD_COMPLETE = 'SETTINGS_NOTIF_DOWNLOAD_COMPLETE',
-    SETTINGS_NOTIF_DOWNLOAD_ERROR = 'SETTINGS_NOTIF_DOWNLOAD_ERROR'
+    SETTINGS_NOTIF_DOWNLOAD_ERROR = 'SETTINGS_NOTIF_DOWNLOAD_ERROR',
+    SETTINGS_OPTION_AUTO_START_DOWNLOAD = 'SETTINGS_OPTION_AUTO_START_DOWNLOAD';
 
 class Options {
     constructor() {
@@ -37,6 +38,14 @@ class Options {
                 display: "Download Error",
                 title: "Notification when a track is not downloadable for the moment - will NOT stop dowloading album but track will be missing !",
             }
+        };
+        this.optionsMapping = {
+            SETTINGS_OPTION_AUTO_START_DOWNLOAD: {
+                name: 'bndcmpdwn.options.option.download.autostart',
+                value: false,
+                display: "Download Autostart",
+                title: "Automatically start to download when album is detected",
+            }
         }
     }
 
@@ -46,8 +55,21 @@ class Options {
         return this
     }
 
+    setOption(name, value) {
+        let mapping = this.optionsMapping[name]
+        localStorage.setItem(mapping.name, value)
+        return this
+    }
+
     getNotification(name) {
         let mapping = this.notifMapping[name]
+        let value = localStorage.getItem(mapping.name)
+        value = (value === null ? mapping.value : value === 'true')
+        return value
+    }
+
+    getOption(name) {
+        let mapping = this.optionsMapping[name]
         let value = localStorage.getItem(mapping.name)
         value = (value === null ? mapping.value : value === 'true')
         return value

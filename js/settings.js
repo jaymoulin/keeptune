@@ -8,7 +8,9 @@ class Settings {
             .bindMenu()
             .createNotifications()
             .bindNotifications()
+            .bindOptions()
             .toggleNotifications()
+            .toggleOptions()
             .createDownloads()
             .bindDownloads()
     }
@@ -34,10 +36,21 @@ class Settings {
     }
 
     createNotifications() {
-        let html = ''
+        let htmlNotif = ''
+        let htmlOptions = ''
         for (let index in this.options.notifMapping) {
             let mapping = this.options.notifMapping[index]
-            html += `<li class="list-group-item">
+            htmlNotif += `<li class="list-group-item">
+                    ${mapping.display}
+                    <div class="material-switch pull-right">
+                        <input id="${mapping.name}" type="checkbox" title="${mapping.title}"/>
+                        <label for="${mapping.name}" class="label-primary" title="${mapping.title}"></label>
+                    </div>
+                </li>`
+        }
+        for (let index in this.options.optionsMapping) {
+            let mapping = this.options.optionsMapping[index]
+            htmlOptions += `<li class="list-group-item">
                     ${mapping.display}
                     <div class="material-switch pull-right">
                         <input id="${mapping.name}" type="checkbox" title="${mapping.title}"/>
@@ -46,7 +59,8 @@ class Settings {
                 </li>`
         }
 
-        document.getElementById('notifications_list').innerHTML = html
+        document.getElementById('notifications_list').innerHTML = htmlNotif
+        document.getElementById('options_list').innerHTML = htmlOptions
         return this
     }
 
@@ -63,6 +77,24 @@ class Settings {
         for (let index in this.options.notifMapping) {
             let mapping = this.options.notifMapping[index]
             if (this.options.getNotification(index)) {
+                document.getElementById(mapping.name).checked = 'checked'
+            }
+        }
+        return this;
+    }
+
+    bindOptions() {
+        for (let index in this.options.optionsMapping) {
+            let mapping = this.options.optionsMapping[index]
+            document.getElementById(mapping.name).addEventListener('change', evt => this.options.setOption(index, evt.target.checked))
+        }
+        return this
+    }
+
+    toggleOptions() {
+        for (let index in this.options.optionsMapping) {
+            let mapping = this.options.optionsMapping[index]
+            if (this.options.getOption(index)) {
                 document.getElementById(mapping.name).checked = 'checked'
             }
         }

@@ -64,6 +64,9 @@ function initDisco(res) {
         });
         options.notify();
         chrome.pageAction.show(res.tabId);
+        if (options.getOption(SETTINGS_OPTION_AUTO_START_DOWNLOAD)) {
+            startDownloadDisco(artist);
+        }
         if (options.getNotification(SETTINGS_NOTIF_DOWNLOAD_ALERT_DISCOGRAPHY)) {
             chrome.notifications.create(DOWNLOAD_DISCO_NOTIFICATION + artist, {
                 'title': "Discography downloadable!",
@@ -110,6 +113,9 @@ function alertDownload(res) {
         prepareStruct(res);
         options.notify();
         displayAlert(res.url);
+        if (options.getOption(SETTINGS_OPTION_AUTO_START_DOWNLOAD)) {
+            startDownloadAlbum(DOWNLOAD_NOTIFICATION + res.url);
+        }
         chrome.pageAction.setTitle({
             "tabId":res.tabId,
             "title":"Download " + objList[res.url].artist + ' - ' + objList[res.url].album

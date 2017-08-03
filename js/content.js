@@ -1,26 +1,48 @@
 if (chrome && chrome.runtime) {
     chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-        var struct = hackJSvars();
+        let discolumns = hackDisco();
+        if (discolumns) {
+            sendResponse({"type": 'disco', "tabId": message.tabId, "url": window.location.hostname, "struct": discolumns});
+            return;
+        }
+        let struct = hackJSvars();
         if (struct) {
-            sendResponse({"url": struct.id, "tabId": message.tabId, "struct": struct});
+            sendResponse({"url": struct.id, "tabId": message.tabId, "struct": struct, "type":'album'});
+            return;
         }
     });
 }
 
 function hackJSvars() {
-    var pagedata = document.getElementById("pagedata");
-    if (typeof(pagedata) == 'undefined' || pagedata == null) {
+    let pagedata = document.getElementById("pagedata");
+    if (typeof(pagedata) === 'undefined' || pagedata === null) {
         return null;
     }
 
-    var script = document.createElement('script');
-    var scriptContent = "document.getElementById(\"pagedata\").title = JSON.stringify(TralbumData);";
+    let script = document.createElement('script');
+    let scriptContent = "document.getElementById(\"pagedata\").title = JSON.stringify(TralbumData);";
     script.id = 'tmpScript';
     script.appendChild(document.createTextNode(scriptContent));
     (document.body || document.head || document.documentElement).appendChild(script);
 
-
-    var el = (JSON.parse(pagedata.title));
+    let el = (JSON.parse(pagedata.title));
     el.albumart = document.getElementById("tralbumArt").getElementsByTagName('img')[0].src;
     return el;
+}
+
+function hackDisco() {
+    let discolumns = document.getElementsByClassName('leftMiddleColumns');
+    if (typeof(discolumns) === 'undefined' || discolumns === null) {
+        return null;
+    }
+    if (discolumns.length) {
+        let discol = discolumns[0].getElementsByTagName('ol');
+        if (discol.length) {
+            return {
+                albums:eval(discol[0].getAttribute('data-initial-values')),
+                albumart:document.getElementsByClassName("popupImage")[0].getAttribute('href')
+            };
+        }
+    }
+    return null;
 }

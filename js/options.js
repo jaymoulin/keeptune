@@ -1,4 +1,5 @@
 const SETTINGS_NOTIF_DOWNLOAD_ALERT = 'SETTINGS_NOTIF_DOWNLOAD_ALERT',
+    SETTINGS_NOTIF_DOWNLOAD_ALERT_DISCOGRAPHY = 'SETTINGS_NOTIF_DOWNLOAD_ALERT_DISCOGRAPHY',
     SETTINGS_NOTIF_DOWNLOAD_PROGRESS = 'SETTINGS_NOTIF_DOWNLOAD_PROGRESS',
     SETTINGS_NOTIF_DOWNLOAD_COMPLETE = 'SETTINGS_NOTIF_DOWNLOAD_COMPLETE',
     SETTINGS_NOTIF_DOWNLOAD_ERROR = 'SETTINGS_NOTIF_DOWNLOAD_ERROR'
@@ -11,6 +12,12 @@ class Options {
                 value: true,
                 display: "Download Alert",
                 title: "Notification when an album is downloadable",
+            },
+            SETTINGS_NOTIF_DOWNLOAD_ALERT_DISCOGRAPHY: {
+                name: 'bndcmpdwn.options.notif.download.alert_disco',
+                value: true,
+                display: "Download discography Alert",
+                title: "Notification when a discography is downloadable",
             },
             SETTINGS_NOTIF_DOWNLOAD_PROGRESS: {
                 name: 'bndcmpdwn.options.notif.download.progress',

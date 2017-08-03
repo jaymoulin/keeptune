@@ -12,6 +12,7 @@
       "64": "icons/64.png",
       "128": "icons/128.png"
   },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "page_action": {
     "default_title": "Bandcamp Downloader"
   },

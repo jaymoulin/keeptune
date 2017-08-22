@@ -38,9 +38,10 @@ function hackDisco() {
     if (discolumns.length) {
         let discol = discolumns[0].getElementsByTagName('ol');
         if (discol.length) {
+            let albumart = document.getElementsByClassName("popupImage");
             return {
                 albums:eval(discol[0].getAttribute('data-initial-values')),
-                albumart:document.getElementsByClassName("popupImage")[0].getAttribute('href')
+                albumart:albumart.length ? albumart[0].getAttribute('href') : null
             };
         }
     }

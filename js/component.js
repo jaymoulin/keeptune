@@ -71,7 +71,7 @@ function initDisco(res) {
             chrome.notifications.create(DOWNLOAD_DISCO_NOTIFICATION + artist, {
                 'title': "Discography downloadable!",
                 'type': "basic",
-                'iconUrl': res.struct.albumart,
+                'iconUrl': res.struct.albumart || 'icons/128.png',
                 "message": "Click here to download " + artist + ' discography'
             });
         }

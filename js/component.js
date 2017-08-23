@@ -58,15 +58,13 @@ function initDisco(res) {
                 let parser = new DOMParser();
                 let albumDocument = parser.parseFromString(xhr.responseText, "text/html");
                 TralbumData.albumart = albumDocument.getElementById("tralbumArt").getElementsByTagName('img')[0].src;
-                prepareStruct({url: url, struct: TralbumData, tabId:res.tabId});
+                TralbumData.artist = artist;
+                prepareStruct({url: TralbumData.id, struct: TralbumData, tabId:res.tabId});
             };
             xhr.send(null)
         });
         options.notify();
         chrome.pageAction.show(res.tabId);
-        if (options.getOption(SETTINGS_OPTION_AUTO_START_DOWNLOAD)) {
-            startDownloadDisco(artist);
-        }
         if (options.getNotification(SETTINGS_NOTIF_DOWNLOAD_ALERT_DISCOGRAPHY)) {
             chrome.notifications.create(DOWNLOAD_DISCO_NOTIFICATION + artist, {
                 'title': "Discography downloadable!",
@@ -74,6 +72,9 @@ function initDisco(res) {
                 'iconUrl': res.struct.albumart || 'icons/128.png',
                 "message": "Click here to download " + artist + ' discography'
             });
+        }
+        if (options.getOption(SETTINGS_OPTION_AUTO_START_DOWNLOAD)) {
+            startDownloadDisco(artist);
         }
         chrome.pageAction.setTitle({
             "tabId":res.tabId,
@@ -106,6 +107,9 @@ function prepareStruct(res) {
             }
         }
     });
+    if (objList[res.url].tracks.length === 0) {
+        delete objList[res.url];
+    }
 }
 
 function alertDownload(res) {

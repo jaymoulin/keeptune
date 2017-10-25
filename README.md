@@ -1,11 +1,11 @@
-Bandcamp Dowloader
+KeepTune
 ==
 
-This Google Chrome extension allows you to easily download albums you can listen on Bandcamp.
+This Google Chrome extension allows you to easily download albums you can listen on Bandcamp and soundcloud and more to come.
 
-Bug report and suggestions are welcome on this URL : [https://github.com/jaymoulin/bandcamp-down-chrome-ext/issues](https://github.com/jaymoulin/bandcamp-down-chrome-ext/issues).
+Bug report and suggestions are welcome on this URL : [https://github.com/jaymoulin/keeptune/issues](https://github.com/jaymoulin/keeptune/issues).
 
-Developpers are also welcome to contribute by forking and PR-ing at this URL : [https://github.com/jaymoulin/bandcamp-down-chrome-ext/pulls](https://github.com/jaymoulin/bandcamp-down-chrome-ext/pulls)
+Developpers are also welcome to contribute by forking and PR-ing at this URL : [https://github.com/jaymoulin/keeptune/pulls](https://github.com/jaymoulin/keeptune/pulls)
 
 ## What it looks like
 
@@ -39,3 +39,7 @@ This page offers you really cool options to ease album downloading !
  ![Retry all the things!](retryAll.png "Retry all the things!")
  
  ![Settings for your notifications](settings.png "Settings for your notifications")
+
+## Update 1.0.0
+
+Soundcloud plateform handled

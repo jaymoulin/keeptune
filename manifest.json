@@ -1,0 +1,31 @@
+{
+   "background": {
+      "persistent": false,
+      "scripts": [ "js/dist/FileSaver.min.js", "js/dist/jszip.min.js", "js/options.js", "js/component.js", "js/background.js", "js/notification.js" ]
+   },
+   "content_scripts": [ {
+      "js": [ "js/dist/sizzle.js", "js/content.js" ],
+      "matches": [ "*://*/*" ]
+   } ],
+   "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com; object-src 'self'",
+   "description": "Download music via bandcamp. Please consider giving money to artists : http://bandcamp.com/help/audio_basics#steal",
+   "homepage_url": "https://bandcamp.com/",
+   "icons": {
+      "128": "icons/128.png",
+      "16": "icons/16.png",
+      "24": "icons/24.png",
+      "32": "icons/32.png",
+      "64": "icons/64.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAp59WBXT8Ka0dcEULOMZxTgGtZL+XWWpWRyrXgD45I3xOlf08i3p8pdViZXO/+N0dgiLRzPCCszcZi58n465sL0M5HbS29c5qjTDzB38uenfnoO++4+Gdg33c9bZQZ4miYUzbC7QePduu9EgyxP42qilcXIu2aG8rrNZJw6De4RS/hR+/2DOPwVPDkbK6X1QmT22yz31e4pNxnegY2U55whkYPz3y9nUciaDgNiq/pk8eRq/D5exBaWlGGsWyR74OuiGZMnDOQKwZzobe3/Wm5DwKftahEI/usY0V9sFj1rOAIFPctKt3agkGQV+fYgiclKaL7Y17H8ERxaktW06DUwIDAQAB",
+   "manifest_version": 2,
+   "minimum_chrome_version": "54",
+   "name": "Bandcamp Downloader",
+   "options_page": "options.html",
+   "page_action": {
+      "default_title": "Bandcamp Downloader"
+   },
+   "permissions": [ "webNavigation", "tabs", "notifications", "*://*.bcbits.com/*", "storage" ],
+   "short_name": "BndcmpDown",
+   "version": "1.1.0"
+}

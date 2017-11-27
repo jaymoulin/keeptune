@@ -10,6 +10,8 @@ KeepTune
 
 Please, feel free to make donations, this will help me continuing making useful apps ;)
 
+I decided to publish their code instead of mine but you can still open issue for bugs reports or feature request
+
 _____
 
 

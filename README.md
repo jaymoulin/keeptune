@@ -5,7 +5,6 @@ KeepTune
 [![Bitcoin donation](https://github.com/jaymoulin/jaymoulin.github.io/raw/master/btc.png "Bitcoin donation")](https://m.freewallet.org/id/374ad82e/btc)
 [![Litecoin donation](https://github.com/jaymoulin/jaymoulin.github.io/raw/master/ltc.png "Litecoin donation")](https://m.freewallet.org/id/374ad82e/ltc)
 [![PayPal donation](https://github.com/jaymoulin/jaymoulin.github.io/raw/master/ppl.png "PayPal donation")](https://www.paypal.me/jaymoulin)
-[![Beerpay donation](https://beerpay.io/jaymoulin/keeptune/badge.svg "Beerpay donation")](https://beerpay.io/jaymoulin/keeptune)
 
 *IMPORTANT UPDATE*: Since my work has been stolen, please make sure you have the [correct extension installed here](https://chrome.google.com/webstore/detail/bandcamp-downloader/oidamlgjlcjhdpkflfefcemhmfpmlfbj) and report any other wrong copy.
 

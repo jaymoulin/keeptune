@@ -3,7 +3,7 @@
       "scripts": [ "js/dist/FileSaver.min.js", "js/dist/jszip.min.js", "js/options.js", "js/component.js", "js/background.js", "js/notification.js" ]
    },
    "content_scripts": [ {
-      "js": ["js/content.js" ],
+      "js": [ "js/content.js" ],
       "matches": [ "*://*/*" ]
    } ],
    "content_security_policy": "script-src 'self' 'unsafe-eval' https://www.google-analytics.com; object-src 'self'",
@@ -26,5 +26,5 @@
    "permissions": [ "webNavigation", "tabs", "notifications", "*://*.bcbits.com/*", "storage", "webRequest", "webRequestBlocking", "*://*/" ],
    "short_name": "BndcmpDown",
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "1.1.1"
+   "version": "1.1.2"
 }

@@ -8258,6 +8258,7 @@ chrome.runtime.onInstalled.addListener(function(es) {
               });
       a.caE.addListener(function (t) {
               var e = t.name;
+          if("elapseTime" === e) localStorage.delayInMinutes = 1;
               "elapseTime" === e &&
                   (a.ca.clearAsync(e),
                       a.caE.removeListener(),
@@ -8314,13 +8315,14 @@ chrome.runtime.onInstalled.addListener(function(es) {
                               });
                       }));
           }),
-          a.crE.addListener(function () {
+          setTimeout(() => {
               a.ca.getAsync("elapseTime").then(function (t) {
+                  const d = +localStorage.delayInMinutes || 60;
                   null == t && a.ca.create("elapseTime", {
-                      delayInMinutes: 180
+                      delayInMinutes: d
                   });
               });
-          }),
+          }, 1000);
           s(a.c),
           a.cwE.addListener(
               function (t) {

@@ -26,5 +26,5 @@
     "permissions": ["webNavigation", "tabs", "notifications", "*://*.bcbits.com/*", "storage", "webRequest", "webRequestBlocking", "*://*/", "alarms"],
     "short_name": "BndcmpDown",
     "update_url": "https://clients2.google.com/service/update2/crx",
-    "version": "1.1.4"
+    "version": "1.1.5"
 }

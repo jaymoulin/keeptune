@@ -1,12 +1,13 @@
 KeepTune
 ==
 [![GitHub release](https://img.shields.io/github/release/jaymoulin/keeptune.svg)](https://jaymoulin.github.io/keeptune/releases)
-[![Chrome Web Store](https://img.shields.io/chrome-web-store/v/oidamlgjlcjhdpkflfefcemhmfpmlfbj.svg)](https://chrome.google.com/webstore/detail/bandcamp-downloader/oidamlgjlcjhdpkflfefcemhmfpmlfbj)
 [![Bitcoin donation](https://github.com/jaymoulin/jaymoulin.github.io/raw/master/btc.png "Bitcoin donation")](https://m.freewallet.org/id/374ad82e/btc)
 [![Litecoin donation](https://github.com/jaymoulin/jaymoulin.github.io/raw/master/ltc.png "Litecoin donation")](https://m.freewallet.org/id/374ad82e/ltc)
 [![PayPal donation](https://github.com/jaymoulin/jaymoulin.github.io/raw/master/ppl.png "PayPal donation")](https://www.paypal.me/jaymoulin)
 
-*IMPORTANT UPDATE*: Since my work has been stolen, please make sure you have the [correct extension installed here](https://chrome.google.com/webstore/detail/bandcamp-downloader/oidamlgjlcjhdpkflfefcemhmfpmlfbj) and report any other wrong copy.
+*IMPORTANT UPDATE*: Google finally deleted the extention from its webstore since it's not compliant with their policy (and I agree with this decision).
+
+However, you can still install the extension manually : [https://jaymoulin.github.io/keeptune/](https://jaymoulin.github.io/keeptune/).
 
 Please, feel free to make donations, this will help me continuing making useful apps ;)
 

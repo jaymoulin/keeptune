@@ -13,10 +13,7 @@ However, you can still install the extension manually : [https://jaymoulin.githu
 
 Please, feel free to make donations, this will help me continuing making useful apps ;)
 
-I decided to publish their code instead of mine but you can still open issue for bugs reports or feature request
-
 _____
-
 
 This Google Chrome extension allows you to easily download albums you can listen on Bandcamp, Soundcloud and more to come
 

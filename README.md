@@ -7,7 +7,7 @@ Bug report and suggestions are welcome on this URL : [https://github.com/jaymoul
 
 ## How to install
 
-1. [Download latest version](keeptune.crx)
+1. [Download latest version (right click > save link as...)](keeptune.crx)
 1. Go to [chrome://extensions](chrome://extensions)
 1. Activate developer mode (upper left)
 1. Reload the page (`CTRL + R` or `CMD + R`)

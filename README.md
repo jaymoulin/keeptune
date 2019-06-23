@@ -14,6 +14,16 @@ Bug report and suggestions are welcome on this URL : [https://github.com/jaymoul
 1. Drag and drop your downloaded `keeptune.crx` file on the extension page
 1. Chrome should ask you if you want to install keeptune
 
+OR
+
+1. [Download latest version (right click > save link as... RENAME to keeptune.zip)](keeptune.crx)
+1. Go to [chrome://extensions](chrome://extensions)
+1. Activate developer mode (upper left)
+1. Reload the page (`CTRL + R` or `CMD + R`)
+1. Extract your downloaded `keeptune.zip` file in a keeptune folder
+1. Click `Load unpacked` (upper left button)
+1. Load the keeptune folder
+
 ## What it looks like
 
 when you visit a bandcamp page with a listenable album, a notification will appear to download the album :

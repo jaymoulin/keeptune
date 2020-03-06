@@ -1,6 +1,6 @@
 KeepTune
 ==
-[![GitHub release](https://img.shields.io/github/release/jaymoulin/keeptune.svg)](https://jaymoulin.github.io/keeptune/releases)
+[![GitHub release](https://img.shields.io/github/release/jaymoulin/keeptune.svg)](https://github.com/jaymoulin/keeptune/releases)
 [![PayPal donation](https://github.com/jaymoulin/jaymoulin.github.io/raw/master/ppl.png "PayPal donation")](https://www.paypal.me/jaymoulin)
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png "Buy me a coffee")](https://www.buymeacoffee.com/3Yu8ajd7W)
 [![Become a Patron](https://badgen.net/badge/become/a%20patron/F96854 "Become a Patron")](https://patreon.com/jaymoulin)

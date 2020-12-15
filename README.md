@@ -10,7 +10,7 @@ KeepTune
 
 However, you can still install the extension manually : [https://jaymoulin.me/me/keeptune/](https://jaymoulin.me/me/keeptune/) or Early Access [https://www.patreon.com/jaymoulin?filters[tag]=keeptune](https://www.patreon.com/jaymoulin?filters[tag]=keeptune).
 
-Please, feel free to make donations, this will help me continue making useful apps ;)
+DISCLAIMER: As-of 2021, this product does not have a free support team anymore. If you want this product to be maintained, please support on Patreon.
 
 _____
 

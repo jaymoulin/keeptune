@@ -9,7 +9,7 @@ KeepTune
 
 *IMPORTANT UPDATE*: Google finally deleted the extension from its webstore since it's not compliant with their policy (and I agree with this decision).
 
-However, you can still install the extension manually : [https://jaymoulin.me/me/keeptune/](https://jaymoulin.me/me/keeptune/) or Early Access [https://www.patreon.com/keeptune?filters[tag]=keeptune](https://www.patreon.com/keeptune?filters[tag]=keeptune).
+However, you can still install the extension manually : [https://brands.jaymoulin.me/me/keeptune/](https://brands.jaymoulin.me/me/keeptune/) or Early Access [https://www.patreon.com/keeptune?filters[tag]=keeptune](https://www.patreon.com/keeptune?filters[tag]=keeptune).
 
 DISCLAIMER: As-of 2021, this product does not have a free support team anymore. If you want this product to be maintained, please support on .
 
@@ -23,15 +23,15 @@ Bug report and suggestions are welcome on this URL : [https://github.com/jaymoul
 
 when you visit a page with a listenable album, a notification will appear to download the album :
 
-![A wild notification appeared!](https://jaymoulin.me/assets/images/me/keeptune/notif-1.png "A wild notification appeared!")
+![A wild notification appeared!](https://brands.jaymoulin.me/assets/images/me/keeptune/notif-1.png "A wild notification appeared!")
 
 Just click on it to download the album
 
-![Download in progress](https://jaymoulin.me/assets/images/me/keeptune/notif-2.png "Download in progress")
+![Download in progress](https://brands.jaymoulin.me/assets/images/me/keeptune/notif-2.png "Download in progress")
 
-![Zip downloaded](https://jaymoulin.me/assets/images/me/keeptune/zip.png "Zip downloaded")
+![Zip downloaded](https://brands.jaymoulin.me/assets/images/me/keeptune/zip.png "Zip downloaded")
 
-![All files in a great folder hierarchy](https://jaymoulin.me/assets/images/me/keeptune/folder.png "All files in a great folder hierarchy")
+![All files in a great folder hierarchy](https://brands.jaymoulin.me/assets/images/me/keeptune/folder.png "All files in a great folder hierarchy")
 
 ## Update 1.0.0
 
@@ -44,11 +44,11 @@ You can now configure the extension with the notification you want to see.
 Also, a new download page allows you to download multiple albums at the same time and retry tracks that failed to download.
 This page offers you really cool options to ease album downloading ! 
  
- ![Download page](https://jaymoulin.me/assets/images/me/keeptune/downloadPage.png "Download page")
+ ![Download page](https://brands.jaymoulin.me/assets/images/me/keeptune/downloadPage.png "Download page")
  
- ![Download page while albums are downloading](https://jaymoulin.me/assets/images/me/keeptune/downloadPageProgress.png "Download page while albums are downloading")
+ ![Download page while albums are downloading](https://brands.jaymoulin.me/assets/images/me/keeptune/downloadPageProgress.png "Download page while albums are downloading")
  
- ![Retry all the things!](https://jaymoulin.me/assets/images/me/keeptune/retryAll.png "Retry all the things!")
+ ![Retry all the things!](https://brands.jaymoulin.me/assets/images/me/keeptune/retryAll.png "Retry all the things!")
  
- ![Settings for your notifications](https://jaymoulin.me/assets/images/me/keeptune/settings.png "Settings for your notifications")
+ ![Settings for your notifications](https://brands.jaymoulin.me/assets/images/me/keeptune/settings.png "Settings for your notifications")
  

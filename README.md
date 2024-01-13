@@ -9,7 +9,7 @@ KeepTune
 
 *IMPORTANT UPDATE*: Google finally deleted the extension from its webstore since it's not compliant with their policy (and I agree with this decision).
 
-However, you can still install the extension manually : [https://brands.jaymoulin.me/me/keeptune/](https://brands.jaymoulin.me/me/keeptune/) or Early Access [https://www.patreon.com/keeptune?filters[tag]=keeptune](https://www.patreon.com/keeptune?filters[tag]=keeptune).
+However, you can still install the extension manually : [https://keeptune.jaymoulin.me//](https://keeptune.jaymoulin.me/ or Early Access [https://www.patreon.com/keeptune](https://www.patreon.com/keeptune).
 
 DISCLAIMER: As-of 2021, this product does not have a free support team anymore. If you want this product to be maintained, please support on .
 
